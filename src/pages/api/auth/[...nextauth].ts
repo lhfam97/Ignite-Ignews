@@ -18,8 +18,8 @@ export default NextAuth({
   callbacks: {
    async signIn(user, account, profile) {
       const { email } = user;
-
       try{
+
         await fauna.query(
           q.If(
             q.Not(
@@ -44,7 +44,9 @@ export default NextAuth({
         )
 
         return true;
-      } catch {
+      } catch(err) {
+
+        console.log(err);
         return false;
       }
 
