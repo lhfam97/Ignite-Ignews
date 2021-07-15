@@ -1,17 +1,27 @@
+/* eslint-disable @next/next/no-img-element */
 import styles from "./styles.module.scss";
-import { SignInButton } from '../SignInButton'
+import { useRouter } from "next/router";
+import { SignInButton } from "../SignInButton";
+import Link from "next/link";
+import { ActiveLink } from "../ActiveLink";
 
-export function Header(){
+export function Header() {
+  const { asPath } = useRouter();
+
   return (
     <header className={styles.headerContainer}>
       <div className={styles.headerContent}>
         <img src="/images/logo.svg" alt="ing.news" />
         <nav>
-          <a className={styles.active} href="Home">Home</a>
-          <a href="Posts">Posts</a>
+          <ActiveLink href="/" activeClassName={styles.active}>
+            <a>Home</a>
+          </ActiveLink>
+          <ActiveLink href="/posts" activeClassName={styles.active}>
+            <a>Posts</a>
+          </ActiveLink>
         </nav>
-        <SignInButton/>
+        <SignInButton />
       </div>
     </header>
-  )
+  );
 }
